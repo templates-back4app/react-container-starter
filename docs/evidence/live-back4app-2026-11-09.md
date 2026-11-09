@@ -33,3 +33,9 @@ Reading: both no-Docker paths serve the bundle uncompressed on this date — the
 - Starter @ 7242a42 (React Router 7, two routes; VITE_API_URL in .env.production) deployed as a fresh app; stamp 0490c3c4 confirmed at 13:48:10 UTC.
 - Direct GET /about: 200 AND the rendered screen is the About route's actual content (verified in a real browser, screenshot archived in the article assets) — the 200 proves the fallback, the render proves the route.
 - VITE_API_URL: value set in .env.production appears verbatim inside dist/assets/index-*.js (grep) and renders on the page — build-time baking demonstrated, not asserted.
+
+## Update flow — validated (same date, app spoke-react-router)
+
+- Pushed commit 48cdc8b adding public/update-check.txt (content update-proof-1794232694) → App actions → Deploy the latest commit → at 13:59:32 UTC the SAME public URL served the new file's exact content. Push → manual deploy → live update confirmed by content, not dashboard status.
+- Earlier the same day, on an app whose branch setting had been changed after creation (framework-rotation), the same action twice rebuilt a stale commit; re-saving the branch is the remedy we'd try first. Recorded as an observed inconsistency, not the normal path.
+- Re-creating an app always reads the branch tip fresh but issues a new URL.
