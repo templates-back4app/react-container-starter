@@ -5,6 +5,7 @@ import viteLogo from './assets/vite.svg'
 import './App.css'
 
 function App() {
+  const apiUrl = import.meta.env.VITE_API_URL ?? "(not set)"
   const [count, setCount] = useState(0)
 
   return (
@@ -17,6 +18,7 @@ function App() {
         </div>
         <div>
           <h1>Get started</h1>
+      <p className="read-the-docs">API endpoint baked at build time: {apiUrl}</p>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
