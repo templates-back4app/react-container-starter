@@ -18,3 +18,12 @@ Rotation commit: 5a40563 (content identical to this repo @ b19cf99*, plus public
 - Functional: page renders, assets load, version stamp served.
 
 Local measurements: docs/evidence/local-measurements-2026-11-06.md
+
+## Paths 2 and 3 — buildpack and upload (same date, same client)
+
+- **Buildpack** (app spoke-react-buildpack, created from the same repo, Build method = Buildpacks; platform message: "This looks like a static site — we'll serve the built files for you"):
+  live 13:13:02 UTC · deep route /some/deep/route: 200 · /assets/index-*.js transferred **222,447 B with no Content-Encoding** (vs 68,557 B gzip-6 from our nginx) · TTFB 1.004 / 0.978 / 0.967 s.
+- **Upload, as-is structure** (app spoke-react-upload, 9 files via the file input): the upload flattened the folder tree in our automated test — /assets/… 404, page broken. A browser folder-drag preserves the tree; our automation cannot perform the drag, so this run documents the structure dependency, not the human flow.
+- **Upload, flat build** (app spoke-react-upload-flat, dist rebuilt with vite build.assetsDir: ""): live 13:18:32 UTC · / 200 · deep route 200 · /index-*.js 200, **222,426 B, no Content-Encoding** · TTFB 1.052 / 0.935 / 0.918 s.
+
+Reading: both no-Docker paths serve the bundle uncompressed on this date — the measured cost of skipping the Dockerfile is 3.2× the JavaScript transfer on this app.
