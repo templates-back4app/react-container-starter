@@ -27,3 +27,9 @@ Local measurements: docs/evidence/local-measurements-2026-11-06.md
 - **Upload, flat build** (app spoke-react-upload-flat, dist rebuilt with vite build.assetsDir: ""): live 13:18:32 UTC · / 200 · deep route 200 · /index-*.js 200, **222,426 B, no Content-Encoding** · TTFB 1.052 / 0.935 / 0.918 s.
 
 Reading: both no-Docker paths serve the bundle uncompressed on this date — the measured cost of skipping the Dockerfile is 3.2× the JavaScript transfer on this app.
+
+## Router + env var verification (app spoke-react-router, same date)
+
+- Starter @ 7242a42 (React Router 7, two routes; VITE_API_URL in .env.production) deployed as a fresh app; stamp 0490c3c4 confirmed at 13:48:10 UTC.
+- Direct GET /about: 200 AND the rendered screen is the About route's actual content (verified in a real browser, screenshot archived in the article assets) — the 200 proves the fallback, the render proves the route.
+- VITE_API_URL: value set in .env.production appears verbatim inside dist/assets/index-*.js (grep) and renders on the page — build-time baking demonstrated, not asserted.
