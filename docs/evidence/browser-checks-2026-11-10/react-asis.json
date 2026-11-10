@@ -1,0 +1,45 @@
+{
+  "kind": "react",
+  "url": "https://mcpreactverify-g97hgo8d.back4.app",
+  "at": "2026-11-10T14:40:18.656Z",
+  "checks": [
+    {
+      "name": "GET / status",
+      "pass": true,
+      "detail": 200
+    },
+    {
+      "name": "home h1 rendered",
+      "pass": true,
+      "detail": "Get started"
+    },
+    {
+      "name": "build-time value line rendered",
+      "pass": true,
+      "detail": "API endpoint baked at build time: (not set)"
+    },
+    {
+      "name": "counter updates on click",
+      "pass": true,
+      "detail": "Count is 3"
+    },
+    {
+      "name": "About link renders the route",
+      "pass": true,
+      "detail": "About this deployment"
+    },
+    {
+      "name": "navigation happened without a page reload",
+      "pass": true,
+      "detail": "kept"
+    },
+    {
+      "name": "direct load of /about renders the route",
+      "pass": true,
+      "detail": "200 About this deployment"
+    }
+  ],
+  "apiLine": "API endpoint baked at build time: (not set)",
+  "passed": 7,
+  "failed": 0
+}
