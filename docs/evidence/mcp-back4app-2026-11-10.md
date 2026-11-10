@@ -48,3 +48,9 @@ Repo commit uploaded: `ba459a6` (branch `main`). This starter was the pilot of t
 - v1: `create_upload` → CLI (32 files, 404 KB, `.env.production` left out) → `create_web_app` (port 8080, builder DOCKERFILE). App c86bca1e-d2a2-4e69-8167-1505418533eb, deployment fd490946-4d3b-47cb-82b2-55fc587f74fc created 13:16:45 UTC; the public URL served `mcp-v1-1794316594` at 13:17:32 UTC. `/about` 200.
 - v2: `create_upload` with the appId → CLI ("Sending 1 new file(s)") → `deploy_web_app`. Deployment 554d93e4-f55e-4814-b533-b49936a4a669 created 13:17:54 UTC, READY 13:18:24 UTC (30 s). The same URL then served `mcp-v2-1794316663`. `/about` 200.
 - Not tested: rollback, and `update_web_app` with a confirmation.
+
+## Compression fix verified on the public URL (2026-11-10)
+
+- Cause: requests reach the container through the platform's CDN with a `Via` header, and nginx's `gzip_proxied` is off by default, so nginx answered them uncompressed and the CDN compressed the response itself.
+- Fix: `gzip_proxied any;` in nginx.conf (commit 49a8d11), redeployed to the same app with `deploy_web_app`.
+- Main JS transferred from the public URL (`Accept-Encoding: gzip`): before 115,854 B, after 81,925 B. The "after" figure equals this bundle compressed by nginx at gzip_comp_level 6.
